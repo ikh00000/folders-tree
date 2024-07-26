@@ -13,6 +13,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "docker:dev": "docker-compose -f docker-compose.dev.yml up",
     "docker:dev:build": "docker-compose -f docker-compose.dev.yml build",
     "docker:dev:down": "docker-compose -f docker-compose.dev.yml down",
