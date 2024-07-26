@@ -10,6 +10,8 @@
     "preview": "vite preview"
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write .",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "predeploy": "npm run build",
   },
   "dependencies": {
