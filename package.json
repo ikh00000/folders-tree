@@ -9,6 +9,7 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview"
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier --write .",
     "predeploy": "npm run build",
   },
   "dependencies": {
