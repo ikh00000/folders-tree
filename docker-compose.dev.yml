@@ -8,4 +8,4 @@ services:
     volumes:
       - .:/folders-tree
       - /folders-tree/node_modules
-    command: npm run dev
+    command: npm run start

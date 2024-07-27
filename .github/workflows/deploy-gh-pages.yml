@@ -1,0 +1,38 @@
+name: Deploy to GH Pages
+
+on:
+  workflow_run:
+    workflows: ['Create Docker Image']
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Pull Docker image
+        run: docker pull ${{ vars.DOCKERHUB_USERNAME }}/folders-tree:latest
+
+      - name: Create and run Docker container
+        run: |
+          docker run -d --name folders-tree-container ${{ vars.DOCKERHUB_USERNAME }}/folders-tree:latest
+          docker exec folders-tree-container npm run build
+
+      - name: Copy dist folder from container
+        run: docker cp folders-tree-container:/folders-tree/dist ./dist
+
+      - name: Deploy to GitHub Pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          npm install -g gh-pages
+          gh-pages -d dist -r https://github-actions:${{ secrets.GH_PAT }}@github.com/ikh00000/folders-tree.git
+
+      - name: Cleanup
+        run: docker rm -f folders-tree-container
