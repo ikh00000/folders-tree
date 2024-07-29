@@ -21,7 +21,7 @@ const mockTextareaValue = '';
   textareaValue: mockTextareaValue,
 });
 
-describe('CreateButton', () => {
+describe('CreateButton Component', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });

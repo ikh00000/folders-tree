@@ -5,7 +5,7 @@ import theme from '../../../styles/styles-theme';
 
 import { render, screen } from '../../../utils/test-util';
 
-describe('Text component', () => {
+describe('Text Component', () => {
   test('renders with default props', () => {
     render(<Text>Default Text</Text>);
     const textElement = screen.getByText('Default Text');

@@ -22,7 +22,7 @@ jest.mock('../common/Popup', () => {
 
 jest.mock('./content', () => () => <div>Some Info Content</div>);
 
-describe('InfoPopup', () => {
+describe('InfoPopup Component', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });

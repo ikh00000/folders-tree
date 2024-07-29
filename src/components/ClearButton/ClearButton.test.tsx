@@ -19,7 +19,7 @@ const mockSetTextareaValue = jest.fn();
   setTextareaValue: mockSetTextareaValue,
 });
 
-describe('ClearButton', () => {
+describe('ClearButton Component', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });

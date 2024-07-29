@@ -9,7 +9,7 @@ const theme = {
   },
 };
 
-describe('ResultMessage', () => {
+describe('ResultMessage Component', () => {
   it('renders the correct text', () => {
     const { getByText } = render(
       <ThemeProvider theme={theme}>
