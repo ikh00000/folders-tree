@@ -2,12 +2,12 @@ import React from 'react';
 import Button from '../common/Button';
 import { text } from '../../helpers/index';
 import { useResultContext } from '../../contexts/ResultContext';
-import { useTextareaContext } from '../../contexts/TextareaContext';
+import { useTextareaRefContext } from '../../contexts/TextareaRefContext';
 import { resultExceptions } from '../Tree/types';
 
 const ClearButton: React.FC = () => {
   const { setResult } = useResultContext();
-  const { setTextareaValue } = useTextareaContext();
+  const { setTextareaValue } = useTextareaRefContext();
 
   const handleClear = () => {
     setTextareaValue('');
