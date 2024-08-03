@@ -9,13 +9,18 @@ import { useTextareaContext } from '../../contexts/TextareaContext';
 
 const CreateButton: React.FC = () => {
   const { setResult } = useResultContext();
-  const { textareaValue } = useTextareaContext();
+  const { setTextareaValue } = useTextareaContext();
 
   const handleCreate = () => {
+    const textareaValue = (
+      document.getElementById('textarea') as HTMLTextAreaElement
+    )?.value;
+
     try {
       let paths;
 
       if (textareaValue) {
+        setTextareaValue(textareaValue);
         paths = JSON.parse(textareaValue);
       } else {
         paths = pathsExample;

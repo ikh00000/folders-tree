@@ -17,4 +17,4 @@ const ClearButton: React.FC = () => {
   return <Button onClick={handleClear}>{text.clearBtn}</Button>;
 };
 
-export default React.memo(ClearButton);
+export default ClearButton;
