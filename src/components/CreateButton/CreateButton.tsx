@@ -5,17 +5,20 @@ import { text } from '../../helpers/index';
 import { pathsExample } from '../../helpers/index';
 import { buildTree } from '../../utils/buildTree';
 import { useResultContext } from '../../contexts/ResultContext';
-import { useTextareaContext } from '../../contexts/TextareaContext';
+import { useTextareaRefContext } from '../../contexts/TextareaRefContext';
 
 const CreateButton: React.FC = () => {
   const { setResult } = useResultContext();
-  const { textareaValue } = useTextareaContext();
+  const { textareaRef, setTextareaValue } = useTextareaRefContext();
 
   const handleCreate = () => {
+    const textareaValue = textareaRef.current?.value;
+
     try {
       let paths;
 
       if (textareaValue) {
+        setTextareaValue(textareaValue);
         paths = JSON.parse(textareaValue);
       } else {
         paths = pathsExample;

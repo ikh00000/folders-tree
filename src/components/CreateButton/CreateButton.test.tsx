@@ -7,18 +7,19 @@ import { text } from '../../helpers';
 import { render } from '../../utils/test-util';
 import { buildTree } from '../../utils/buildTree';
 import { useResultContext } from '../../contexts/ResultContext';
-import { useTextareaContext } from '../../contexts/TextareaContext';
-
+import { useTextareaRefContext } from '../../contexts/TextareaRefContext';
 jest.mock('../../contexts/ResultContext');
-jest.mock('../../contexts/TextareaContext');
+jest.mock('../../contexts/TextareaRefContext');
 jest.mock('../../utils/buildTree');
 
 const mockSetResult = jest.fn();
-const mockTextareaValue = '';
+const mockTextareaRef = { current: { value: '' } };
+const mockSetTextareaValue = jest.fn();
 
 (useResultContext as jest.Mock).mockReturnValue({ setResult: mockSetResult });
-(useTextareaContext as jest.Mock).mockReturnValue({
-  textareaValue: mockTextareaValue,
+(useTextareaRefContext as jest.Mock).mockReturnValue({
+  textareaRef: mockTextareaRef,
+  setTextareaValue: mockSetTextareaValue,
 });
 
 describe('CreateButton Component', () => {
@@ -32,8 +33,9 @@ describe('CreateButton Component', () => {
   });
 
   it('handles create with empty textarea and example paths', () => {
-    (useTextareaContext as jest.Mock).mockReturnValueOnce({
-      textareaValue: '',
+    (useTextareaRefContext as jest.Mock).mockReturnValueOnce({
+      textareaRef: { current: { value: '' } },
+      setTextareaValue: mockSetTextareaValue,
     });
     (buildTree as jest.Mock).mockReturnValueOnce({});
 
@@ -47,8 +49,9 @@ describe('CreateButton Component', () => {
 
   it('handles create with empty textarea and non-empty tree', () => {
     const mockTree = { root: {} };
-    (useTextareaContext as jest.Mock).mockReturnValueOnce({
-      textareaValue: '',
+    (useTextareaRefContext as jest.Mock).mockReturnValueOnce({
+      textareaRef: { current: { value: '' } },
+      setTextareaValue: mockSetTextareaValue,
     });
     (buildTree as jest.Mock).mockReturnValueOnce(mockTree);
 
@@ -59,8 +62,9 @@ describe('CreateButton Component', () => {
   });
 
   it('handles create with invalid JSON in textarea', () => {
-    (useTextareaContext as jest.Mock).mockReturnValueOnce({
-      textareaValue: 'invalid JSON',
+    (useTextareaRefContext as jest.Mock).mockReturnValueOnce({
+      textareaRef: { current: { value: 'invalid JSON' } },
+      setTextareaValue: mockSetTextareaValue,
     });
 
     const { getByText } = render(<CreateButton />);
@@ -70,8 +74,9 @@ describe('CreateButton Component', () => {
   });
 
   it('handles create with valid JSON in textarea resulting in empty tree', () => {
-    (useTextareaContext as jest.Mock).mockReturnValueOnce({
-      textareaValue: '[]',
+    (useTextareaRefContext as jest.Mock).mockReturnValueOnce({
+      textareaRef: { current: { value: '[]' } },
+      setTextareaValue: mockSetTextareaValue,
     });
     (buildTree as jest.Mock).mockReturnValueOnce({});
 
@@ -83,8 +88,9 @@ describe('CreateButton Component', () => {
 
   it('handles create with valid JSON in textarea resulting in non-empty tree', () => {
     const mockTree = { root: {} };
-    (useTextareaContext as jest.Mock).mockReturnValueOnce({
-      textareaValue: '["path"]',
+    (useTextareaRefContext as jest.Mock).mockReturnValueOnce({
+      textareaRef: { current: { value: '["path"]' } },
+      setTextareaValue: mockSetTextareaValue,
     });
     (buildTree as jest.Mock).mockReturnValueOnce(mockTree);
 
