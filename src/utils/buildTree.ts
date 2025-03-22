@@ -59,13 +59,14 @@ const cleanTree = (node: TreeNodeType): void => {
         delete child.__isFile;
       }
 
-      const isFileHasChild = child.__isFile && Object.keys(child).length > 1;
+      const childArray = Object.keys(child).length > 1;
+
+      const isFileHasChild = child.__isFile && childArray;
       if (isFileHasChild) {
         delete child.__isFile;
       }
 
-      const isEmptyHasChild =
-        child.__isEmptyFolder && Object.keys(child).length > 1;
+      const isEmptyHasChild = child.__isEmptyFolder && childArray;
       if (isEmptyHasChild) {
         delete child.__isEmptyFolder;
       }

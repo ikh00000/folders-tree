@@ -73,4 +73,4 @@ const Tree: React.FC = () => {
   return null;
 };
 
-export default React.memo(Tree);
+export default Tree;

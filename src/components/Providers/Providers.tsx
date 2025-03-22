@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from '../../styles/styles-theme';
 import { ResultProvider } from '../../contexts/ResultContext';
-import { TextareaProvider } from '../../contexts/TextareaContext';
+import { TextareaRefProvider } from '../../contexts/TextareaRefContext';
 
 interface ProvidersProps {
   children: ReactNode;
@@ -11,9 +11,9 @@ interface ProvidersProps {
 const Providers: React.FC<ProvidersProps> = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
-      <TextareaProvider>
+      <TextareaRefProvider>
         <ResultProvider>{children}</ResultProvider>
-      </TextareaProvider>
+      </TextareaRefProvider>
     </ThemeProvider>
   );
 };

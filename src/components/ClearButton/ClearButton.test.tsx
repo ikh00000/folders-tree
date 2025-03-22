@@ -6,16 +6,16 @@ import { resultExceptions } from '../Tree/types';
 import { text } from '../../helpers';
 import { render } from '../../utils/test-util';
 import { useResultContext } from '../../contexts/ResultContext';
-import { useTextareaContext } from '../../contexts/TextareaContext';
+import { useTextareaRefContext } from '../../contexts/TextareaRefContext';
 
 jest.mock('../../contexts/ResultContext');
-jest.mock('../../contexts/TextareaContext');
+jest.mock('../../contexts/TextareaRefContext');
 
 const mockSetResult = jest.fn();
 const mockSetTextareaValue = jest.fn();
 
 (useResultContext as jest.Mock).mockReturnValue({ setResult: mockSetResult });
-(useTextareaContext as jest.Mock).mockReturnValue({
+(useTextareaRefContext as jest.Mock).mockReturnValue({
   setTextareaValue: mockSetTextareaValue,
 });
 

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useTextareaRefContext } from '../../contexts/TextareaRefContext';
 import styled from 'styled-components';
-import { useTextareaContext } from '../../contexts/TextareaContext';
 
 const StyledTextarea = styled.textarea`
   width: 100%;
@@ -24,14 +24,21 @@ interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
 const Textarea: React.FC<TextareaProps> = (props) => {
-  const { textareaValue, setTextareaValue } = useTextareaContext();
+  const [state, setState] = useState('');
+  const { textareaRef } = useTextareaRefContext();
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setTextareaValue(e.target.value);
+    setState(e.target.value);
   };
 
   return (
-    <StyledTextarea value={textareaValue} onChange={handleChange} {...props} />
+    <StyledTextarea
+      ref={textareaRef}
+      id="textarea"
+      value={state}
+      onChange={handleChange}
+      {...props}
+    />
   );
 };
 
